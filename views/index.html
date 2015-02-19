@@ -1,0 +1,53 @@
+<head>
+	<link href="interface.css" rel="stylesheet" type="text/css">
+	<link href="bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="flat-ui.css" rel="stylesheet" type="text/css">
+
+	<script src="jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".btn").click(function() {
+				var state = $(this).data("state");
+
+				if ( state == "off" ) {
+					console.log("turning on!");
+					$(this).html("Turn Off").data("state", "on");
+					$(this).removeClass("btn-primary").addClass("btn-danger");
+				} else if ( state == "on" ) {
+					console.log("turning off!");
+					$(this).html("Turn On").data("state", "off");
+					$(this).removeClass("btn-danger").addClass("btn-primary");
+				} else {
+					console.log("unknown state...");
+				}
+	 
+				$.ajax({
+					url: "/toggle/1.html"
+				}).success(function() {
+					console.log("success!");
+				}).error(function() {
+					console.log("oops...");
+				});
+			});
+		});
+	</script>
+	<style>
+		td {
+			vertical-align: middle !important;
+		}
+	</style>
+</head>
+<body>
+	<h1>Our Home</h1>
+	<table class="table">
+		<tr>
+	          <td>
+		    Device 1
+	          </td>
+		  <td>
+		    <button class="btn btn-block btn-lg btn-primary" type="button" data-state="off">Turn On</button>
+		  </td>
+		</tr>
+	</table>
+</body>
+
